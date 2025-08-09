@@ -10,16 +10,15 @@ Automates installation and configuration of:
 - Managed nodes: Linux (RHEL/CentOS/Alma/Rocky, Ubuntu/Debian)
 - SSH access with privilege escalation (become)
 
-## Inventory example
+---
 
-`yaml
-# inventory/hosts.yml
-all:
-  hosts:
-    myserver1:
-      ansible_host: 10.0.0.11
-    myserver2:
-      ansible_host: 10.0.0.12
+## Installation & Cloning
 
+`bash
+git clone https://github.com/AliEdd1/SplunkAuditdWithAnsible.git
+cd SplunkAuditdWithAnsible
+# Dry run
+ansible-playbook -i inventory/hosts.yml playbook.yml --check
 
-
+# Apply
+ansible-playbook -i inventory/hosts.yml playbook.yml
