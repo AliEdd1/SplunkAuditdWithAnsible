@@ -20,3 +20,14 @@ all:
       ansible_host: 10.0.0.11
     myserver2:
       ansible_host: 10.0.0.12
+
+
+
+# Dry run
+ansible-playbook -i inventory/hosts.yml playbook.yml --check
+
+# Apply
+ansible-playbook -i inventory/hosts.yml playbook.yml
+
+# Run only syslog-ng
+ansible-playbook -i inventory/hosts.yml playbook.yml --tags syslog
