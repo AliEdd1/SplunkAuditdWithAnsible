@@ -23,11 +23,3 @@ all:
 
 
 
-# Dry run
-ansible-playbook -i inventory/hosts.yml playbook.yml --check
-
-# Apply
-ansible-playbook -i inventory/hosts.yml playbook.yml
-
-# Run only syslog-ng
-ansible-playbook -i inventory/hosts.yml playbook.yml --tags syslog
