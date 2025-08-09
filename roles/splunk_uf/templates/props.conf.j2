@@ -1,0 +1,17 @@
+[source::/var/log/audit/audit.log]
+TRANSFORMS-force_index = force_audit_index
+TRANSFORMS-force_sourcetype = force_linux_audit
+EVAL-user = if(isnotnull(auid), userbyid(auid), null())
+EXTRACT-obj = name="([^"]+)" in type=PATH\s+.*\s+name="([^"]+)"
+
+[source::/var/log/audit/splunk_audit.log]
+TRANSFORMS-force_index = force_audit_index
+TRANSFORMS-force_sourcetype = force_linux_audit
+EVAL-user = if(isnotnull(auid), userbyid(auid), null())
+EXTRACT-obj = name="([^"]+)" in type=PATH\s+.*\s+name="([^"]+)"
+
+[linux_audit]
+EVAL-user = if(isnotnull(auid), userbyid(auid), null())
+EXTRACT-obj = name="([^"]+)" in type=PATH\s+.*\s+name="([^"]+)"
+EXTRACT-auid = auid=(\d+) in type=SYSCALL\s+.*auid=(\d+)
+

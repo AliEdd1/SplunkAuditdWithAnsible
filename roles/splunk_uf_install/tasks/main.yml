@@ -1,0 +1,31 @@
+---
+- name: Copy Splunk UF .deb installer to target machine
+  copy:
+    src: /root/splunkforwarder-9.4.3-237ebbd22314-linux-amd64.deb
+    dest: /tmp/splunkforwarder.deb
+    mode: '0644'
+
+- name: Install Splunk UF from .deb
+  apt:
+    deb: /tmp/splunkforwarder.deb
+    state: present
+
+- name: Start Splunk UF and accept license non-interactively
+  command: >
+    /opt/splunkforwarder/bin/splunk start
+    --accept-license
+    --answer-yes
+    --no-prompt
+    --seed-passwd AviMana123
+  args:
+    creates: /opt/splunkforwarder/var/log/splunk/splunkd.log
+
+  args:
+    creates: /opt/splunkforwarder/etc/splunk.version
+
+- name: Add splunk user to adm group (for /etc access)
+  user:
+    name: splunk
+    groups: adm
+    append: yes
+

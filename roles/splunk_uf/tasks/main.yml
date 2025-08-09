@@ -1,0 +1,23 @@
+- name: Deploy Splunk inputs.conf
+  template:
+    src: inputs.conf.j2
+    dest: /opt/splunkforwarder/etc/system/local/inputs.conf
+
+- name: Deploy outputs.conf
+  template:
+    src: outputs.conf.j2
+    dest: /opt/splunkforwarder/etc/system/local/outputs.conf
+
+- name: Deploy props.conf
+  template:
+    src: props.conf.j2
+    dest: /opt/splunkforwarder/etc/system/local/props.conf
+
+- name: Deploy transforms.conf
+  template:
+    src: transforms.conf.j2
+    dest: /opt/splunkforwarder/etc/system/local/transforms.conf
+
+      #- name: Restart Splunk UF
+      # command: /opt/splunkforwarder/bin/splunk restart
+

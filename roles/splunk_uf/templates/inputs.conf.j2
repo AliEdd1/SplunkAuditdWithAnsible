@@ -1,0 +1,20 @@
+[monitor:///var/log/audit/audit.log]
+disabled = false
+index = audit_index
+sourcetype = linux_audit
+
+[monitor:///var/log/audit/splunk_audit.log]
+disabled = false
+index = audit_index
+sourcetype = linux_audit
+
+[monitor:///var/log/syslog-ng/all_logs.log]
+disabled = false
+index = audit_index
+sourcetype = syslog
+
+[monitor:///var/log/auth.log]
+disabled = false
+index = audit_index
+sourcetype = linux_secure
+

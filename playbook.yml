@@ -1,0 +1,9 @@
+- name: Setup auditd, syslog-ng, and Splunk UF
+  hosts: all
+  become: true
+  roles:
+    - splunk_uf_install
+    - auditd
+    - syslog_ng
+    - splunk_uf
+

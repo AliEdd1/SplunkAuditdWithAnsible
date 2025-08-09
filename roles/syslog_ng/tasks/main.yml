@@ -1,0 +1,34 @@
+- name: Install syslog-ng
+  apt:
+    name: syslog-ng
+    state: present
+
+- name: Deploy syslog-ng config
+  template:
+    src: syslog-ng.conf.j2
+    dest: /etc/syslog-ng/syslog-ng.conf
+
+- name: Create log directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: syslog
+    group: adm
+    mode: 0750
+  loop:
+    - /var/log/audit
+    - /var/log/syslog-ng
+
+- name: Ensure /var/log/auth.log exists
+  file:
+    path: /var/log/auth.log
+    state: touch
+    owner: syslog
+    group: adm
+    mode: 0640
+
+- name: Restart syslog-ng
+  service:
+    name: syslog-ng
+    state: restarted
+

@@ -1,0 +1,39 @@
+---
+- name: Install auditd
+  apt:
+    name: auditd
+    state: present
+    update_cache: yes
+
+- name: Ensure audit rule for /etc/ is present
+  lineinfile:
+    path: /etc/audit/rules.d/etc_monitor.rules
+    line: "-w /etc/ -p wa -k etc_monitor"
+    create: yes
+    state: present
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Reload audit rules (skip if already applied)
+  command: augenrules --load
+  register: augenrules_result
+  failed_when: >
+    augenrules_result.rc != 0 and
+    'Rule exists' not in augenrules_result.stderr and
+    'No change' not in augenrules_result.stdout
+  changed_when: "'No change' not in augenrules_result.stdout"
+
+- name: Enable audisp syslog plugin
+  lineinfile:
+    path: /etc/audit/plugins.d/syslog.conf
+    regexp: '^active\s*='
+    line: 'active = yes'
+    backup: yes
+
+- name: Restart auditd service
+  service:
+    name: auditd
+    state: restarted
+    enabled: yes
+
