@@ -23,25 +23,31 @@ Splunk indexer reachable from target hosts
 
 
 📁 Project Structure
-inventory/
-  hosts.yml
-playbook.yml
-roles/
-  auditd/
-    tasks/main.yml
-  splunk_uf/
-    tasks/main.yml
-    templates/
-      inputs.conf.j2
-      outputs.conf.j2
-      props.conf.j2
-      transforms.conf.j2
-  splunk_uf_install/
-    tasks/main.yml
-  syslog_ng/
-    tasks/main.yml
-    templates/
-      syslog-ng.conf.j2
+.
+├── inventory
+│   └── hosts.yml
+├── playbook.yml
+├── README.md
+└── roles
+    ├── auditd
+    │   └── tasks
+    │       └── main.yml
+    ├── splunk_uf
+    │   ├── tasks
+    │   │   └── main.yml
+    │   └── templates
+    │       ├── inputs.conf.j2
+    │       ├── outputs.conf.j2
+    │       ├── props.conf.j2
+    │       └── transforms.conf.j2
+    ├── splunk_uf_install
+    │   └── tasks
+    │       └── main.yml
+    └── syslog_ng
+        ├── tasks
+        │   └── main.yml
+        └── templates
+            └── syslog-ng.conf.j2
 
 
 📖 Usage
