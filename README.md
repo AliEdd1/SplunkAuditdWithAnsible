@@ -50,36 +50,43 @@ Follow the steps below to run this Ansible playbook. Note: Hover over any code b
 ✅ Step-by-Step Guide
 
 Clone this repository
+```bash
 git clone https://github.com/AliEdd1/SplunkAuditdWithAnsible.git
 cd SplunkAuditdWithAnsible
-
+```
 
 Update the inventory
 Edit the inventory/hosts.yml file and add your target servers:
+```yml
 all:
   hosts:
     server1:
       ansible_host: 192.168.1.10
     server2:
       ansible_host: 192.168.1.11
-
+```
 
 Run the playbook
 
 Dry run (check mode)
+```bash
 ansible-playbook -i inventory/hosts.yml playbook.yml --check
-
+```
 
 Apply changes
+```bash
 ansible-playbook -i inventory/hosts.yml playbook.yml
-
+```
 
 Run only syslog-ng
+```bash
 ansible-playbook -i inventory/hosts.yml playbook.yml --tags syslog
-
+```
 
 Run only auditd
+```bash
 ansible-playbook -i inventory/hosts.yml playbook.yml --tags auditd
+```
 
 
 
@@ -87,13 +94,16 @@ ansible-playbook -i inventory/hosts.yml playbook.yml --tags auditd
 
 
 💡 Tip: Use --limit to run against a specific host:
+```bash
 ansible-playbook -i inventory/hosts.yml playbook.yml --limit server1
-
+```
 
 🔐 Secrets
 Use Ansible Vault to store sensitive data like Splunk tokens:
+```bash
 ansible-vault create group_vars/vault.yml
-
+```
 Reference them in your variables as:
+```yml
 splunk_uf_hec_token: "{{ vault_splunk_hec_token }}"
-
+```
